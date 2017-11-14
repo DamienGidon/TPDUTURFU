@@ -54,7 +54,8 @@ export class RegisterComponent {
         {   
             this.registrationService.register(this.model)
                 .then(
-                    ()=>{ this.router.navigateByUrl("/login");},
+                
+                    ()=>{console.log("ok"); this.router.navigateByUrl("/login");},
                     
                     e =>{
                     this.userExists = true;
