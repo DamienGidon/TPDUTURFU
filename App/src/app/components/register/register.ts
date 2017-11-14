@@ -37,7 +37,7 @@ export class RegisterComponent {
         this.registrationService.usernameExists(this.model.username) 
         .then( (result) => {
             badUser = result;
-            if(this.model.password == null || this.model.password.length > 5)          
+            if(this.model.password == null || this.model.password.length < 5)          
                 this.badPass = true;
     
             if(this.model.pictureUrl == null ){
