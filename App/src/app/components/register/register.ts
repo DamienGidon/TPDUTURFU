@@ -16,6 +16,9 @@ export class RegisterComponent {
     ngForm: NgForm;
 
     model = new UserRegistration();
+    userExists : boolean;
+    badAvatar : boolean;
+    badPass : boolean;
 
     constructor(
         private registrationService: RegistrationService,
@@ -23,10 +26,39 @@ export class RegisterComponent {
     ) { }
 
     register() {
+        this.userExists = false; 
+        this.badPass = false; 
+        this.badAvatar = false;
+        var badUser = false;
         if (this.ngForm.form.invalid) {
             return;
         }
         
-        // register user with registrationService
+        this.registrationService.usernameExists(this.model.username) 
+            .then( () => {
+                badUser = true;
+            });
+        if(this.model.password.length < 5)
+            this.badPass = true;
+
+        if(this.model.pictureUrl.startsWith("http://") )
+            this.badAvatar = true;
+        
+        if(badUser)
+            this.userExists = true;
+            
+        if(this.badPass || this.badAvatar || this.userExists){
+            return;
+        } 
+        else 
+        {   
+            this.registrationService.register(this.model)
+                .then(
+                    ()=>{ this.router.navigateByUrl("/login");},
+                    
+                    e =>{
+                    this.userExists = true;
+                });
+        }
     }
 }
