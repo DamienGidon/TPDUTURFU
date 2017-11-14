@@ -35,31 +35,32 @@ export class RegisterComponent {
         }
         
         this.registrationService.usernameExists(this.model.username) 
-            .then( () => {
-                badUser = true;
-            });
-        if(this.model.password.length < 5)
-            this.badPass = true;
-
-        if(this.model.pictureUrl.startsWith("http://") )
-            this.badAvatar = true;
-        
-        if(badUser)
-            this.userExists = true;
+        .then( (result) => {
+            badUser = result;
+            if(this.model.password == null || this.model.password.length > 5)          
+                this.badPass = true;
+    
+            if(this.model.pictureUrl == null ){
+                this.badAvatar = true;
+            }
             
-        if(this.badPass || this.badAvatar || this.userExists){
-            return;
-        } 
-        else 
-        {   
-            this.registrationService.register(this.model)
-                .then(
+            if(badUser)
+                this.userExists = true;
                 
-                    ()=>{console.log("ok"); this.router.navigateByUrl("/login");},
+            if(this.badPass || this.badAvatar || this.userExists){
+                return;
+            } 
+            else 
+            {   
+                this.registrationService.register(this.model)
+                    .then(
                     
-                    e =>{
-                    this.userExists = true;
-                });
-        }
+                        ()=>{console.log("ok"); this.router.navigateByUrl("/login");},
+                        
+                        e =>{
+                        this.userExists = true;
+                    });
+            }
+        });
     }
 }
