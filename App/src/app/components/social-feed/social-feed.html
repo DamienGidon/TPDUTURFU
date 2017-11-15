@@ -1,8 +1,9 @@
 <div class="social-app-feed">
-    <!-- <post></post> -->
+    <post *ngFor="let post of items" [post]="post">
+    </post>
 </div>
 <div class="social-app-inputs">
-    <user-inputs (submitted)="onSubmit($event)" [channelId]="channelId"></user-inputs>
+    <user-inputs [channelId]="channelId"></user-inputs>
 </div>
 <style>
     :host {
@@ -17,7 +18,7 @@
      .social-app-feed {
         flex: 1;
         overflow: auto;
-        padding: 0 20px;
+        padding: 0px;
     }
     .social-app-inputs {
         height: 150px;

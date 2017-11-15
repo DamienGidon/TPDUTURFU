@@ -1,4 +1,4 @@
-<form (ngSubmit)="send()">
+<form (ngSubmit)="send()" novalidate #f="ngForm">
     <textarea name="message" class="form-control" rows="3" [(ngModel)]="message"></textarea>
     <div class="user-inputs-action">
         <button class="btn btn-default" [disabled]="!message" type="submit" >Poster</button>
@@ -13,9 +13,10 @@
     }
     textarea {
         resize: none;
+        background-color: ghostwhite;
     }
     .user-inputs-action {
-        margin-top: 20px;
+        margin-top: 20px;   
     }
 
     .user-inputs-action > button {
@@ -23,5 +24,11 @@
     }
     .user-inputs-action > button:last-child{
         margin: 0;
+    }
+    .btn-default:disabled {
+        background-color: lightgrey;
+    }
+    .btn-default {
+        background-color: #93e41f;
     }
 </style>
