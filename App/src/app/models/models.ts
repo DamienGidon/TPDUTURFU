@@ -16,6 +16,11 @@ export class UserRegistration {
     pictureUrl?: string;
 }
 
+export class Notification {
+    title:string;
+    text:string;
+}
+
 export class User {
     id: string;
     username: string;

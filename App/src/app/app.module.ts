@@ -10,6 +10,7 @@ import * as components from './components';
 import * as services from 'services';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { authenticatedHttpFactory } from './services/AuthenticatedHttp'
+import { SimpleNotificationsModule,PushNotificationsModule} from 'angular2-notifications';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { authenticatedHttpFactory } from './services/AuthenticatedHttp'
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        SimpleNotificationsModule, PushNotificationsModule,
         HttpModule,
         AccordionModule.forRoot(),
         ModalModule.forRoot(),
@@ -41,6 +43,7 @@ import { authenticatedHttpFactory } from './services/AuthenticatedHttp'
     providers: [
         AUTH_PROVIDERS,
         services.AuthGuard,
+        services.NotificationsStorageService,
         services.UserStorageService,
         services.SocketService, {
             provide: services.ServerConfiguration,

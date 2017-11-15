@@ -1,5 +1,6 @@
 export { ChannelService } from './ChannelService';
 export { PostService } from './PostService';
+export { NotificationsStorageService } from './NotificationsStorageService';
 export { PostSocketService } from './PostSocketService';
 export { MessageParser } from './MessageParser';
 export { LoggedUser } from './User';
