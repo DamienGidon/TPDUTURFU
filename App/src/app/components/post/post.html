@@ -1,6 +1,6 @@
 <div class="header">
     <div class="user-picture">
-        <img src={{post.user.pictureUrl}} alt="Bad picture" height="42" width="42">
+        <img src={{post.user.pictureUrl}} alt="Wrong Picture"height="42" width="42">
     </div>
     <div class="username">{{post.user.username}}
     </div>
@@ -8,7 +8,7 @@
         <div class="date" >{{post.creationTime|date:"dd/MM HH:mm"}}</div>
         <div class="actions">
             <a [class.liked]="post.liked"(click)="DoLike()" >
-                <i class="glyphicon glyphicon-heart"></i>
+                <i class="glyphicon glyphicon-thumbs-up"></i>
             </a>
     </div>
     </div>
@@ -17,8 +17,7 @@
     <pre class="message">{{post.message}}</pre>
 </div>
 <div class="footer">
-    <!-- Comments here -->
-    <!-- <user-inputs [channelId]="post.channel.id" (submitted)="onComment($event)"></user-inputs> -->
+
 </div>
 <style>
     :host {
@@ -61,7 +60,7 @@
         padding-right: 15px;
     }
     .actions > a.liked {
-        color: #f17070;
+        color: #707df1;
         text-shadow: none;
         cursor: default;
         padding-right: 15px;
