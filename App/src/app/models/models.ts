@@ -32,6 +32,10 @@ export interface Channel {
     id: string;
     name: string;
 }
+export class Channel implements Channel {
+    id: string;
+    name: string;
+}
 export class Post {
     id: string;
     user: User;

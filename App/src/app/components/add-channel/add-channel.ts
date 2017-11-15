@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { ModalDirective } from 'ngx-bootstrap';
 import { ChannelService } from 'services';
 
-/**
- * Add a new channel in the list
- */
 @Component({
     selector: 'add-channel',
     templateUrl: 'add-channel.html'
@@ -23,10 +20,10 @@ export class AddChannelComponent {
         private channelService: ChannelService
     ) {
     }
-
+    @Output() callParent = new EventEmitter<string>();
     save() {
         if (this.ngForm.valid) {
-            // this.modal.hide() to close de dialog
+            this.callParent.emit(this.model.name);
         }
     }
 }
