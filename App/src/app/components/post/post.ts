@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post } from 'models';
+import { Comment, Post } from 'models';
 import { PostService, PostSocketService, LoggedUser, MessageParser } from 'services';
 
 /**
@@ -11,6 +11,7 @@ import { PostService, PostSocketService, LoggedUser, MessageParser } from 'servi
 })
 export class PostComponent { 
     @Input() post: Post;
+    showTextArea: boolean = false;
     
     constructor(
         private postSocket: PostSocketService, 
@@ -21,12 +22,22 @@ export class PostComponent {
 
     ngOnInit() {
         this.post.content = this.parser.parse(this.post);
+        this.postSocket.onComment((comment:Comment) => this.onComment(comment))
     }
 
     /**
      * Send the new post message to the server
      * @param message message to send
      */
-    onComment(message: string) {
+    onComment(message: Comment) {
+        if(message.post.id===this.post.id) this.post.comments.push(message);
     }
+
+    Answer(){
+        this.showTextArea= !this.showTextArea;
+    }
+    callParent(action: string){
+        if(action=="close")
+            this.showTextArea=false;
+     }
 }
