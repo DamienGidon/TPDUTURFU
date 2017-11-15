@@ -9,6 +9,7 @@ export * from './post-content/video/video-post-content';
 export * from './post-content/youtube/youtube-post-content';
 export * from './social-app/social-app';
 export * from './login/login';
+export * from './logout/logout';
 export * from './register/register';
 export * from './menu/menu';
 export * from './add-channel/add-channel';

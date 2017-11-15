@@ -27,6 +27,7 @@ import { authenticatedHttpFactory } from './services/AuthenticatedHttp'
         components.UserInputsComponent,
         components.VideoFeedContentComponent,
         components.YoutubeFeedContentComponent,
+        components.LogoutComponent
     ],
     imports: [
         BrowserModule,
