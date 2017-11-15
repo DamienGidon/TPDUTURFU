@@ -1,11 +1,12 @@
 <div class="header">
-    <div class="user-picture">
+    <div class="picture">
         <img src={{post.user.pictureUrl}} alt="Wrong Picture"height="42" width="42">
     </div>
     <div class="username">{{post.user.username}}
     </div>
     <div class="right">
         <div class="date" >{{post.creationTime|date:"dd/MM HH:mm"}}</div>
+        <button class="glyphicon glyphicon-plus reply" (click)="Answer()"></button>
         <div class="actions">
             <a [class.liked]="post.liked"(click)="DoLike()" >
                 <i class="glyphicon glyphicon-thumbs-up"></i>
@@ -17,7 +18,22 @@
     <pre class="message">{{post.message}}</pre>
 </div>
 <div class="footer">
-
+    <div *ngFor="let com of post.comments">
+        <hr>
+        <div class="picture">
+            <img src={{com.user.pictureUrl}} alt="Bad picture" height="42" width="42">
+        </div>
+        <div class="username">{{com.user.username}}
+        </div>
+        <br>
+        <div class="right">
+            <div class="date" >{{com.creationTime|date:"dd/MM HH:mm"}}</div>    
+        </div>
+    <pre class="message">{{com.message}}</pre>               
+</div>
+<div *ngIf="showTextArea" class="social-app-inputs">
+    <post-comment [comment] = "post" (callParent) = "callParent($event)"></post-comment>
+</div>
 </div>
 <style>
     :host {
@@ -26,7 +42,7 @@
         border-radius: 4px;
         border: 1px solid #d8d8d8;
     }
-    .user-picture {
+    .picture {
         width: 50px;
         height: 50px;
         border-radius: 2px;

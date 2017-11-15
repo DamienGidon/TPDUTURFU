@@ -8,7 +8,7 @@ import { PostService, PostSocketService, LoggedUser, MessageParser } from 'servi
 })
 export class PostComponent { 
     @Input() post: Post;
-    visible: boolean=false;
+    showTextArea: boolean = false;
     constructor(
         private postSocket: PostSocketService, 
         private user: LoggedUser,
@@ -20,6 +20,7 @@ export class PostComponent {
         let res = this.parser.parse(this.post)
         this.postSocket.onLike(this.OnLike);
         this.post.content = res==null?this.post.content:res;
+        this.postSocket.onComment((comment:Comment) => this.onComment(comment))
     }
     DoLike(){
         this.postService.like(this.post);
@@ -27,7 +28,14 @@ export class PostComponent {
      OnLike = (like:Like) => {
          if(like.user.id===this.user.id && like.post.id===this.post.id) this.post.liked=true;
     }
+    Answer(){
+        this.showTextArea= !this.showTextArea;
+    }
     callParent(action: string){
-       if(action=="close")this.visible=false;
+        if(action=="close")
+            this.showTextArea=false;
+     }
+    onComment(message: Comment) {
+        if(message.post.id===this.post.id) this.post.comments.push(message);
     }
 }
