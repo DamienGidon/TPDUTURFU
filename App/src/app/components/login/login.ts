@@ -28,7 +28,6 @@ export class LoginComponent  {
             },
             //here do the handle of rrors liek already used userName
             e => {console.log("KO : "+JSON.stringify(e));
-            console.log(this.model.userName+ " : " + this.model.password);
             this.failed = true;
             }
         );
