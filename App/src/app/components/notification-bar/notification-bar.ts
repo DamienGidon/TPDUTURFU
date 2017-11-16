@@ -12,7 +12,7 @@ export class NotificationBarComponent implements OnInit {
     notifications: Array<Notification> = [];
     public options = {
     position: ["bottom", "left"],
-    timeOut: 500,
+    timeOut: 5000,
     lastOnBottom: true
     }
     constructor( private postSocket: PostSocketService,
@@ -51,7 +51,6 @@ export class NotificationBarComponent implements OnInit {
          }
      }
      OnLike=(like:Like)=>{
-         debugger;
         if(like.user.id==this.user.id) return;
         if(like.post.user.id==this.user.id){
              let n = new Notification();
@@ -76,7 +75,6 @@ export class NotificationBarComponent implements OnInit {
         this.DisplayNotif(n);
      }
      OnPost=(post:Post)=>{
-         debugger;
         if(post.user.id==this.user.id) return;
          else{
              let n = new Notification();
