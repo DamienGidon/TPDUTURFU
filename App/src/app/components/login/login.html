@@ -8,15 +8,14 @@
         <label for="password">Mot de Passe</label>
         <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
         <br>
-        <div *ngIf="failed === true" class="loginError">
+        <div *ngIf="failed === true" class="error">
             Utilisateur ou passe invalide.
         </div>
     </div>
     <div class="form-group">
-        <button [disabled]="!f.form.valid" class="btn btn-primary">Se Connecter</button>
+        <button [disabled]="!f.form.valid" class="btn btn-primary" style=" background: #3b5998;">Se Connecter</button>
        
-        <a [routerLink]="['/register']" class="btn btn-link">S'enregistrer</a>
-
+        <a [routerLink]="['/register']" class="btn btn-link" style=" color: #3b5998;">S'enregistrer</a>
     </div>
 </form>
 <style>
@@ -24,5 +23,10 @@
         display: block;
         background: white;
         padding: 20px;
+        color: #3b5998;
+    }
+    .error{
+        color: red;
+        font-size: 15px;
     }
 </style>
