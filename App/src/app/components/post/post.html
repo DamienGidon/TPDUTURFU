@@ -2,8 +2,7 @@
     <div class="picture">
         <img src={{post.user.pictureUrl}} height="42" width="42">
     </div>
-    <div class="username">{{post.user.username}}
-    </div>
+    <div class="username">{{post.user.username}}</div>
     <div class="right">
         <div class="date" >{{post.creationTime|date:"dd/MM HH:mm"}}</div>
         <button class="glyphicon glyphicon-plus reply" (click)="Answer()"></button>
@@ -11,7 +10,7 @@
             <a [class.liked]="post.liked"(click)="DoLike()" >
                 <i class="glyphicon glyphicon-thumbs-up"></i>
             </a>
-    </div>
+        </div>
     </div>
 </div>
 <div class="body">
@@ -20,27 +19,28 @@
 <div class="footer">
     <div *ngFor="let com of post.comments">
         <hr>
-        <div class="picture">
-            <img src={{com.user.pictureUrl}} alt="Bad picture" height="42" width="42">
-        </div>
-        <div class="username">{{com.user.username}}
-        </div>
-        <br>
-        <div class="right">
-            <div class="date" >{{com.creationTime|date:"dd/MM HH:mm"}}</div>    
-        </div>
-    <pre class="message">{{com.message}}</pre>               
+        <div class="com">
+            <div class="picture">
+                <img src={{com.user.pictureUrl}} alt="Wrong picture" height="42" width="42">
+            </div>
+            <div class="username">{{com.user.username}}</div>
+            <div class="right">
+                <div class="date" >{{com.creationTime|date:"dd/MM HH:mm"}}</div>    
+            </div>
+        </div>           
+        <pre style="width: 80%; margin-left: 20%; background: white" class="message">{{com.message}}</pre>
+    </div>
+    <div *ngIf="showTextArea" class="social-app-inputs">
+        <post-comment [comment] = "post" (callParent) = "callParent($event)"></post-comment>
+    </div>
 </div>
-<div *ngIf="showTextArea" class="social-app-inputs">
-    <post-comment [comment] = "post" (callParent) = "callParent($event)"></post-comment>
-</div>
-</div>
+
 <style>
     :host {
         background: white;
         display: block;
         border-radius: 4px;
-        border: 1px solid #d8d8d8;
+        border: 2px solid #c7c7c7;
     }
     .picture {
         width: 50px;
@@ -50,11 +50,6 @@
     .header {
         padding: 15px;
         display: flex;
-    }
-    .footer{
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-bottom: 5px;
     }
     .username {
         font-weight: bold;
@@ -80,16 +75,29 @@
         text-shadow: 0 0 1px #3B5998;
         cursor: default;
         padding-right: 15px;
+        padding-top: 5px;
     }
     .reply{
         background-color: transparent;
         padding-right: 5px;
         border-color: transparent;
-        border:0px;
+        padding-bottom: 50px;
+        padding-right: 15px;
     }
     pre.message {
         background: rgb(241, 241, 241);
         margin:10px;
         border: 1px;
+    }
+    .footer{
+       background: rgb(241, 241, 241);
+       height: 100%;
+    }
+    .com{
+        display: flex;
+        width: 80%;
+        margin-left: 20%;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 </style>
