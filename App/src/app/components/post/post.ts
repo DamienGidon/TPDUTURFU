@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post,Like,Comment } from 'models';
+import { Post,Like,Comment,PostContent,PicturePostContent, YoutubePostContent  } from 'models';
 import { PostService, PostSocketService, LoggedUser, MessageParser } from 'services';
 
 @Component({
@@ -25,7 +25,7 @@ export class PostComponent {
     DoLike(){
         this.postService.like(this.post);
     }
-     OnLike = (like:Like) => {
+    OnLike = (like:Like) => {
          if(like.user.id===this.user.id && like.post.id===this.post.id) this.post.liked=true;
     }
     Answer(){
@@ -37,5 +37,13 @@ export class PostComponent {
      }
     onComment(message: Comment) {
         if(message.post.id===this.post.id) this.post.comments.push(message);
+    }
+
+    pictureContent(postContent: PostContent<any>): boolean {
+        return postContent instanceof PicturePostContent;
+    }
+    
+    youtubeContent(postContent: PostContent<any>): boolean {
+        return postContent instanceof YoutubePostContent;
     }
 }

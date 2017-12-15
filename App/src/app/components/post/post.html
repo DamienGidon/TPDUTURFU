@@ -14,6 +14,12 @@
     </div>
 </div>
 <div class="body">
+    <div *ngIf="pictureContent(post.content)">
+        <picture-post-content [postContent]="post.content"></picture-post-content>
+    </div>
+    <div *ngIf="youtubeContent(post.content)">
+        <youtube-post-content [postContent]="post.content"></youtube-post-content>
+    </div>
     <pre class="message">{{post.message}}</pre>
 </div>
 <div class="footer">
@@ -21,13 +27,19 @@
         <hr>
         <div class="com">
             <div class="picture">
-                <img src={{com.user.pictureUrl}} alt="Wrong picture" height="42" width="42">
+                <img src={{com.user.pictureUrl}} height="42" width="42">
             </div>
             <div class="username">{{com.user.username}}</div>
             <div class="right">
                 <div class="date" >{{com.creationTime|date:"dd/MM HH:mm"}}</div>    
             </div>
-        </div>           
+        </div>
+        <div *ngIf="pictureContent(com.content)">
+            <picture-post-content [postContent]="com.content"></picture-post-content>
+        </div>
+        <div *ngIf="youtubeContent(com.content)">
+            <youtube-post-content [postContent]="com.content"></youtube-post-content>
+        </div>
         <pre style="width: 80%; margin-left: 20%; background: white" class="message">{{com.message}}</pre>
     </div>
     <div *ngIf="showTextArea" class="social-app-inputs">
